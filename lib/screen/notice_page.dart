@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:motsha_app/const/toast_message.dart';
-
 import 'package:motsha_app/provider/notice_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-
 import 'package:provider/provider.dart';
 
 class NoticePage extends StatefulWidget {
@@ -26,6 +24,7 @@ class _NoticePageState extends State<NoticePage> {
     super.didChangeDependencies();
   }
 
+  //save notice image
   _saveImage() async {
     var status = await Permission.storage.request();
     if (status.isGranted) {
@@ -100,7 +99,7 @@ class _NoticePageState extends State<NoticePage> {
                                     size: 40,
                                     color: Colors.green,
                                   )),
-                              Text("${noticeData[index].description}"),
+                              //Text("${noticeData[index].description}"),
                               TextButton(
                                   onPressed: () {},
                                   child: Text("Click here to download pdf"))

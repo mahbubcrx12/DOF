@@ -15,6 +15,14 @@ class _SearchHereState extends State<SearchHere> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: (() {
+              Navigator.of(context).pop();
+            }),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            )),
         title: Text(
           "Search Fisherman",
           style: TextStyle(color: Colors.black),
@@ -58,12 +66,10 @@ class _SearchHereState extends State<SearchHere> {
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.green)),
                   onPressed: () {
-
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (_) => SearchFisherMan(
                               searchInput: filterController.text,
                             )));
-
                   },
                   child: Text("Search"))
             ],
