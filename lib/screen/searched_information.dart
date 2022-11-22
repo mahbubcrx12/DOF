@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:motsha_app/screen/search_fisherman.dart';
 import '../model/fisherman_model.dart';
 import 'package:http/http.dart' as http;
-import '../provider/notice_provider.dart';
 
 class SearchFisherMan extends StatefulWidget {
   SearchFisherMan({Key? key, required this.searchInput}) : super(key: key);
@@ -115,7 +114,7 @@ class _SearchFisherManState extends State<SearchFisherMan> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    " ${fishermanData[index].fishermanNameBng}",
+                                    "${fishermanData[index].fishermanNameBng}",
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -194,6 +193,36 @@ class _SearchFisherManState extends State<SearchFisherMan> {
                                   ),
                                   Text(
                                     "Mother's Name: ${fishermanData[index].mothersName}",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Number of Daughter: ${fishermanData[index].numberOfDaughter}",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Number Of Son: ${fishermanData[index].numberOfSon}",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Number Of Father: ${fishermanData[index].numberOfFather}",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Number Of Mother: ${fishermanData[index].numberOfMother}",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Number Of Spouse: ${fishermanData[index].numberOfSpouse}",
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                     ),

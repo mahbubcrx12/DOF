@@ -44,6 +44,7 @@ dependencies:
   fluttertoast: ^8.1.1
   flutter_downloader: ^1.9.1
   path_provider: ^2.0.11
+  bangla_utilities: ^1.0.0
   
 
  

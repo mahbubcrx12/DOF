@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:motsha_app/provider/notice_provider.dart';
 import 'package:motsha_app/screen/splash.dart';
 import 'package:provider/provider.dart';

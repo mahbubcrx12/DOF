@@ -37,9 +37,9 @@ class Data {
   String? gender;
   String? mothersName;
   String? fathersName;
-  Null? spouseName;
+  String? spouseName;
   String? dateOfBirth;
-  Null? mobile;
+  int? mobile;
   String? permanentDivision;
   String? permanentDistrict;
   String? permanentUpazilla;
@@ -50,13 +50,13 @@ class Data {
   String? placeOfBirth;
   String? religion;
   String? education;
-  Null? maritalStaus;
+  String? maritalStaus;
   int? totalFamilyMember;
-  Null? numberOfSpouse;
-  Null? numberOfMother;
-  Null? numberOfFather;
-  Null? numberOfDaughter;
-  Null? numberOfSon;
+  int? numberOfSpouse;
+  int? numberOfMother;
+  int? numberOfFather;
+  int? numberOfDaughter;
+  int? numberOfSon;
   String? nationality;
   String? presentDivision;
   String? presentDistrict;
@@ -69,23 +69,23 @@ class Data {
   String? typeOfFishing;
   String? groupMember;
   String? ownerOfNet;
-  Null? lengthOfNet;
-  Null? widthOfNet;
-  Null? priceOfNet;
-  Null? sourceOfPurchaseOfNet;
+  int? lengthOfNet;
+  int? widthOfNet;
+  int? priceOfNet;
+  String? sourceOfPurchaseOfNet;
   String? typeOfVessel;
   String? ownerOfVessel;
-  Null? lengthOfVessels;
-  Null? widthOfVessels;
-  Null? heightOfVessels;
-  Null? priceOfVessels;
-  Null? typeOfEmploymentonVessel;
+  int? lengthOfVessels;
+  int? widthOfVessels;
+  int? heightOfVessels;
+  int? priceOfVessels;
+  String? typeOfEmploymentonVessel;
   String? mainProfession;
   String? subProfession;
   int? annualIncome;
-  Null? fishermenYearlyLoan;
-  Null? fishermenYearlySaving;
-  Null? fishermenDangerPeriodofLiving;
+  String? fishermenYearlyLoan;
+  String? fishermenYearlySaving;
+  String? fishermenDangerPeriodofLiving;
 
   Data(
       {this.formId,

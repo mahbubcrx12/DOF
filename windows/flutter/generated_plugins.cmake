@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  bangla_utilities
   permission_handler_windows
 )
 

@@ -15,20 +15,22 @@ class _SearchHereState extends State<SearchHere> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+
         leading: IconButton(
             onPressed: (() {
               Navigator.of(context).pop();
             }),
             icon: Icon(
               Icons.arrow_back_ios,
-              color: Colors.black,
+              color: Colors.white,
             )),
         title: Text(
           "Search Fisherman",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.green,
       ),
       body: Container(
         child: Padding(
@@ -43,14 +45,20 @@ class _SearchHereState extends State<SearchHere> {
                 child: TextField(
                   controller: filterController,
                   decoration: InputDecoration(
-                      hintText: "Enter Form ID",
+                      hintText: "Enter Form ID/NID",
                       prefixIcon: Icon(
                         Icons.search_outlined,
                         color: Colors.green,
                       ),
-                      suffixIcon: Icon(
-                        Icons.close,
-                        color: Colors.red,
+                      suffixIcon: InkWell(
+                        onTap: (){
+                          filterController.clear();
+                        },
+                        child: Icon(
+                          Icons.clear,
+                          color: Colors.red,
+
+                        ),
                       ),
                       focusedBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
