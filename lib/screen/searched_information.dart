@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:motsha_app/screen/search_fisherman.dart';
 import '../model/fisherman_model.dart';
 import 'package:http/http.dart' as http;
@@ -80,7 +81,8 @@ class _SearchFisherManState extends State<SearchFisherMan> {
             )
           ],
         ),
-        body: ListView.builder(
+        body: fishermanData.isNotEmpty?
+        ListView.builder(
             shrinkWrap: true,
             itemCount: fishermanData.length,
             itemBuilder: (context, index) {
@@ -259,6 +261,9 @@ class _SearchFisherManState extends State<SearchFisherMan> {
                       ))
                 ],
               );
-            }));
+            }):
+            Center(child: SpinKitThreeBounce(color: Colors.green,size: 60,),)
+
+    );
   }
 }

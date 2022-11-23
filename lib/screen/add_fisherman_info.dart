@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:bangla_utilities/bangla_utilities.dart';
+import 'package:intl/intl.dart';
+
 
 class AddFisherMan extends StatefulWidget {
   const AddFisherMan({Key? key}) : super(key: key);
@@ -22,6 +23,11 @@ class _AddFisherManState extends State<AddFisherMan> {
   TextEditingController upazillaIdController = TextEditingController();
   TextEditingController postOfficeIdController = TextEditingController();
   TextEditingController imageController = TextEditingController();
+
+  List _genderList=["Male","Female"];
+  final selectedGender="Male";
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +65,8 @@ class _AddFisherManState extends State<AddFisherMan> {
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.green),
                     ),
-                      labelText: "Enter Name Bengali",
-                      hintText: "Enter Name Bengali",
+                      labelText: "জেলের নাম",
+                      hintText: "জেলের নাম",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           gapPadding: 4.0,
@@ -76,8 +82,8 @@ class _AddFisherManState extends State<AddFisherMan> {
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.green),
                       ),
-                      labelText: "Enter Fisherman Name",
-                      hintText: "Enter Fisherman Name",
+                      labelText: "Fisherman Name",
+                      hintText: "Fisherman Name",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           gapPadding: 4.0,
@@ -93,8 +99,8 @@ class _AddFisherManState extends State<AddFisherMan> {
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.green),
                       ),
-                      labelText: "Enter NID Number",
-                      hintText: "Enter NID Number",
+                      labelText: "NID Number",
+                      hintText: "NID Number",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           gapPadding: 4.0,
@@ -110,8 +116,8 @@ class _AddFisherManState extends State<AddFisherMan> {
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.green),
                       ),
-                      labelText: "Enter Mobile Number",
-                      hintText: "Enter Mobile Number",
+                      labelText: "Mobile Number",
+                      hintText: "Mobile Number",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           gapPadding: 4.0,
@@ -127,13 +133,15 @@ class _AddFisherManState extends State<AddFisherMan> {
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.green),
                       ),
-                      labelText: "Select Gender",
-                      hintText: "Select Gender",
+                      labelText: "Gender",
+                      hintText: "Gender",
+                    suffixIcon:Icon(Icons.arrow_drop_down),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           gapPadding: 4.0,
                           borderSide:
                           BorderSide(color: Color(0xFF642E4C), width: 30))),
+                  
                 ),
               ),
               Padding(
@@ -144,13 +152,28 @@ class _AddFisherManState extends State<AddFisherMan> {
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.green),
                       ),
-                      labelText: "Enter Date Of Birth",
-                      hintText: "Enter Date Of Birth",
+                      labelText: "Date Of Birth",
+                      hintText: "Date Of Birth",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           gapPadding: 4.0,
                           borderSide:
                           BorderSide(color: Color(0xFF642E4C), width: 30))),
+                  onTap: ()async{
+                    DateTime? pickedDate=await showDatePicker(
+
+                        context: context,
+
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1930),
+                        lastDate: DateTime.now()
+                    );
+                    if(pickedDate != null){
+                      setState(() {
+                        dateOfBirthController.text=DateFormat("yyyy-MM-dd").format(pickedDate);
+                      });
+                    }
+                  },
                 ),
               ),
               Padding(
@@ -161,8 +184,8 @@ class _AddFisherManState extends State<AddFisherMan> {
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.green),
                       ),
-                      labelText: "Enter Mother's Name",
-                      hintText: "Enter Mother's Name",
+                      labelText: "Mother's Name",
+                      hintText: "Mother's Name",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           gapPadding: 4.0,
@@ -178,8 +201,8 @@ class _AddFisherManState extends State<AddFisherMan> {
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.green),
                       ),
-                      labelText: "Enter Father's Name",
-                      hintText: "Enter Father's Name",
+                      labelText: "Father's Name",
+                      hintText: "Father's Name",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           gapPadding: 4.0,
@@ -195,8 +218,8 @@ class _AddFisherManState extends State<AddFisherMan> {
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.green),
                       ),
-                      labelText: "Enter Division",
-                      hintText: "Enter Division",
+                      labelText: "Division",
+                      hintText: "Division",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           gapPadding: 4.0,
@@ -212,8 +235,8 @@ class _AddFisherManState extends State<AddFisherMan> {
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.green),
                       ),
-                      labelText: "Enter District",
-                      hintText: "Enter District",
+                      labelText: "District",
+                      hintText: "District",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           gapPadding: 4.0,
@@ -229,8 +252,8 @@ class _AddFisherManState extends State<AddFisherMan> {
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.green),
                       ),
-                      labelText: "Enter Upazilla",
-                      hintText: "Enter Upazilla",
+                      labelText: "Upazilla",
+                      hintText: "Upazilla",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           gapPadding: 4.0,
@@ -246,8 +269,8 @@ class _AddFisherManState extends State<AddFisherMan> {
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.green),
                       ),
-                      labelText: "Enter Post Office",
-                      hintText: "Enter Post Office",
+                      labelText: "Post Office",
+                      hintText: "Post Office",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           gapPadding: 4.0,
