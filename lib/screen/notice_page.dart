@@ -49,7 +49,7 @@ class _NoticePageState extends State<NoticePage> {
 
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.green,
           leading: IconButton(
               onPressed: () {
                 Navigator.of(context).pop();
@@ -104,10 +104,10 @@ class _NoticePageState extends State<NoticePage> {
                                     color: Colors.green,
                                   )),
                               //Text("${noticeData[index].description}"),
-                              TextButton(
-                                  onPressed: () {
-                                  },
-                                  child: Text("Click here to download pdf")),
+                              // TextButton(
+                              //     onPressed: () {
+                              //     },
+                              //     child: Text("Click here to download pdf")),
 
                             ],
                           ),

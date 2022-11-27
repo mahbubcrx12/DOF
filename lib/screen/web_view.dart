@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:motsha_app/screen/add_fisherman_info.dart';
+import 'package:motsha_app/screen/issue_submit.dart';
 import 'package:motsha_app/screen/notice_page.dart';
 import 'package:motsha_app/screen/search_fisherman.dart';
 import 'package:motsha_app/screen/searched_information.dart';
@@ -36,7 +37,7 @@ class _MatshoWebPageState extends State<MatshoWebPage> {
                       return AlertDialog(
                         title: Text("select an option"),
                         content: Container(
-                          height: 200,
+                          height: MediaQuery.of(context).size.height*.35,
                           child: Column(
                             children: [
                               GestureDetector(
@@ -99,6 +100,29 @@ class _MatshoWebPageState extends State<MatshoWebPage> {
                                   child: Center(
                                     child: Text(
                                       "Search",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.yellow,
+                                          fontWeight: FontWeight.w400,
+                                          decoration: TextDecoration.none),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              GestureDetector(
+                                onTap: (() {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: ((context) => IssueSubmitPage())));
+                                }),
+                                child: Container(
+                                  height: 40,
+                                  width: 200,
+                                  decoration: BoxDecoration(
+                                      color: Colors.blueGrey),
+                                  child: Center(
+                                    child: Text(
+                                      "Submit Issues",
                                       style: TextStyle(
                                           fontSize: 20,
                                           color: Colors.yellow,

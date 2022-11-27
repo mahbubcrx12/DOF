@@ -23,11 +23,11 @@ class _SearchHereState extends State<SearchHere> {
             }),
             icon: Icon(
               Icons.arrow_back_ios,
-              color: Colors.white,
+              color: Colors.black,
             )),
         title: Text(
           "Search Fisherman",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         backgroundColor: Colors.green,
