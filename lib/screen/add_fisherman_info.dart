@@ -30,7 +30,9 @@ class _AddFisherManState extends State<AddFisherMan> {
   TextEditingController upazillaIdController = TextEditingController();
   TextEditingController postOfficeIdController = TextEditingController();
   TextEditingController imageController = TextEditingController();
-  String? gender;
+
+  final GlobalKey<FormState> _key=GlobalKey<FormState>();
+
   var _value = '-1';
 
   File? image;
@@ -69,6 +71,7 @@ class _AddFisherManState extends State<AddFisherMan> {
     request.fields["districtId"] = districtIdController.text.toString();
     request.fields["upazillaId"] = upazillaIdController.text.toString();
     request.fields["postOfficeId"] = postOfficeIdController.text.toString();
+    request.fields["dateOfBirth"] = dateOfBirthController.text.toString();
     var imageFile = await http.MultipartFile.fromPath("image", image!.path);
     request.files.add(imageFile);
     setState(() {
@@ -96,19 +99,19 @@ class _AddFisherManState extends State<AddFisherMan> {
   @override
   void dispose() {
     // TODO: implement dispose
-     fishermanNameBngController.clear();
-     fishermanNameEngController.clear();
-     nationalIdController.clear();
-     mobileController.clear();
-     genderController.clear();
-     dateOfBirthController.clear();
-     mothersNameController.clear();
-     fathersNameController.clear();
-     divisionIdController.clear();
-     districtIdController.clear();
-     upazillaIdController.clear();
-     postOfficeIdController.clear();
-     imageController.clear();
+     fishermanNameBngController.dispose();
+     fishermanNameEngController.dispose();
+     nationalIdController.dispose();
+     mobileController.dispose();
+     genderController.dispose();
+     dateOfBirthController.dispose();
+     mothersNameController.dispose();
+     fathersNameController.dispose();
+     divisionIdController.dispose();
+     districtIdController.dispose();
+     upazillaIdController.dispose();
+     postOfficeIdController.dispose();
+     imageController.dispose();
 
     super.dispose();
   }
@@ -127,7 +130,7 @@ class _AddFisherManState extends State<AddFisherMan> {
           ),
         ),
         title: Text(
-          "Add fisherman info",
+          "Add Fisherman Info",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -136,311 +139,421 @@ class _AddFisherManState extends State<AddFisherMan> {
       body: Container(
         padding: EdgeInsets.all(20),
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: TextFormField(
-                  controller: fishermanNameBngController,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
-                      ),
-                      labelText: "জেলের নাম",
-                      hintText: "জেলের নাম",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          gapPadding: 4.0,
-                          borderSide:
-                              BorderSide(color: Color(0xFF642E4C), width: 30))),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: TextFormField(
-                  controller: fishermanNameEngController,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
-                      ),
-                      labelText: "Fisherman Name",
-                      hintText: "Fisherman Name",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          gapPadding: 4.0,
-                          borderSide:
-                              BorderSide(color: Color(0xFF642E4C), width: 30))),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: TextFormField(
-                  controller: nationalIdController,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
-                      ),
-                      labelText: "NID Number",
-                      hintText: "NID Number",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          gapPadding: 4.0,
-                          borderSide:
-                              BorderSide(color: Color(0xFF642E4C), width: 30))),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: TextFormField(
-                  controller: mobileController,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
-                      ),
-                      labelText: "Mobile Number",
-                      hintText: "Mobile Number",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          gapPadding: 4.0,
-                          borderSide:
-                              BorderSide(color: Color(0xFF642E4C), width: 30))),
-                ),
-              ),
-              Padding(
+          child: Form(
+            key: _key,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                  child: TextFormField(
+                    controller: fishermanNameBngController,
+                    validator: (value) {
+                      if(value== null || value.isEmpty)
+                        return "Field is required";
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.green),
+                        ),
+                        labelText: "জেলের নাম",
+                        hintText: "জেলের নাম",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 4.0,
+                            borderSide:
+                                BorderSide(color: Color(0xFF642E4C), width: 30))),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                  child: TextFormField(
+                    controller: fishermanNameEngController,
+                    validator: (value) {
+                      if(value== null || value.isEmpty)
+                        return "Field is required";
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.green),
+                        ),
+                        labelText: "Fisherman Name",
+                        hintText: "Fisherman Name",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 4.0,
+                            borderSide:
+                                BorderSide(color: Color(0xFF642E4C), width: 30))),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                  child: TextFormField(
+                    controller: nationalIdController,
+                    validator: (value) {
+                      if(value== null || value.isEmpty)
+                        return "Field is required";
+                      return null;
+                    },
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.green),
+                        ),
+                        labelText: "NID Number",
+                        hintText: "NID Number",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 4.0,
+                            borderSide:
+                                BorderSide(color: Color(0xFF642E4C), width: 30))),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                  child: TextFormField(
+                    controller: mobileController,
+                    validator: (value) {
+                      if(value== null || value.isEmpty || value.length<11 || value.length>11)
+                        return "Enter a valid number";
+                      return null;
+                    },
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.green),
+                        ),
+                        labelText: "Mobile Number",
+                        hintText: "Mobile Number",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 4.0,
+                            borderSide:
+                                BorderSide(color: Color(0xFF642E4C), width: 30))),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 15),
                   child: DropdownButtonFormField(
-                      decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green),
-                          ),
-                          labelText: "Gender",
-                          hintText: "Gender",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              gapPadding: 4.0,
-                              borderSide: BorderSide(
-                                  color: Color(0xFF642E4C), width: 30))),
-                      value: _value,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("---select Gender---"),
-                          value: '-1',
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Male"),
-                          value: '0',
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Female"),
-                          value: '1',
-                        )
-                      ],
-                      onChanged: (v) {
-                        genderController != v;
-                      })),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: TextFormField(
-                  controller: dateOfBirthController,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
-                      ),
-                      labelText: "Date Of Birth",
-                      hintText: "Date Of Birth",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          gapPadding: 4.0,
-                          borderSide:
-                              BorderSide(color: Color(0xFF642E4C), width: 30))),
-                  onTap: () async {
-                    DateTime? pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1930),
-                        lastDate: DateTime.now());
-                    if (pickedDate != null) {
+                    validator: (value) {
+                      if(value== null )
+                        return "Field is required";
+                      return null;
+                    },
+                    icon: Icon(Icons.keyboard_arrow_down_sharp),
+                    onChanged: (v) {
                       setState(() {
-                        dateOfBirthController.text =
-                            DateFormat("yyyy-MM-dd").format(pickedDate);
+                        genderController.text=v.toString();
                       });
-                    }
-                  },
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: TextFormField(
-                  controller: mothersNameController,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
-                      ),
-                      labelText: "Mother's Name",
-                      hintText: "Mother's Name",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          gapPadding: 4.0,
-                          borderSide:
-                              BorderSide(color: Color(0xFF642E4C), width: 30))),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: TextFormField(
-                  controller: fathersNameController,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
-                      ),
-                      labelText: "Father's Name",
-                      hintText: "Father's Name",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          gapPadding: 4.0,
-                          borderSide:
-                              BorderSide(color: Color(0xFF642E4C), width: 30))),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: TextFormField(
-                  controller: divisionIdController,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
-                      ),
-                      labelText: "Division",
-                      hintText: "Division",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          gapPadding: 4.0,
-                          borderSide:
-                              BorderSide(color: Color(0xFF642E4C), width: 30))),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: TextFormField(
-                  controller: districtIdController,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
-                      ),
-                      labelText: "District",
-                      hintText: "District",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          gapPadding: 4.0,
-                          borderSide:
-                              BorderSide(color: Color(0xFF642E4C), width: 30))),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: TextFormField(
-                  controller: upazillaIdController,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
-                      ),
-                      labelText: "Upazilla",
-                      hintText: "Upazilla",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          gapPadding: 4.0,
-                          borderSide:
-                              BorderSide(color: Color(0xFF642E4C), width: 30))),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: TextFormField(
-                  controller: postOfficeIdController,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
-                      ),
-                      labelText: "Post Office",
-                      hintText: "Post Office",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          gapPadding: 4.0,
-                          borderSide:
-                              BorderSide(color: Colors.green, width: 30))),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  takeImage();
-                },
-                child: image == null
-                    ? Container(
-                        height: MediaQuery.of(context).size.height * .25,
-                        width: MediaQuery.of(context).size.width * .5,
-                        color: Colors.green.withOpacity(.35),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(25),
-                          child: Icon(
-                            Icons.camera_alt_outlined,
-                            size: 80,
-                            color: Colors.green,
-                          ),
+                    },
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.green),
                         ),
-                      )
-                    : Image.file(
-                        File(image!.path),
-                        height: 200,
-                        width: 250,
-                        fit: BoxFit.cover,
+                        labelText: "Gender",
+                        hintText: "Gender",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 4.0,
+                            borderSide:
+                            BorderSide(color: Color(0xFF642E4C), width: 30))),
+                    items: [
+                      DropdownMenuItem(
+                        child: Text(
+                          "Male",
+                        ),
+                        value: "Male",
                       ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Center(
-                  child: Text(
-                "Upload an Image",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              )),
-              Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Container(
-                      height: 40,
-                      width: 80,
-                      decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(13)),
-                      child: InkWell(
-                        onTap: () {
-                          addFisherman();
-                          //Navigator.of(context).pop();
-                        },
-                        child: Center(
-                          child: Text(
-                            "Submit",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                      DropdownMenuItem(
+                        child: Text(
+                          "Female",
+                        ),
+                        value: "Female",
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Padding(
+                //     padding:
+                //         const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                //     child: DropdownButtonFormField(
+                //
+                //         decoration: InputDecoration(
+                //             enabledBorder: OutlineInputBorder(
+                //               borderSide: BorderSide(color: Colors.green),
+                //             ),
+                //             labelText: "Gender",
+                //             hintText: "Gender",
+                //             border: OutlineInputBorder(
+                //                 borderRadius: BorderRadius.circular(12),
+                //                 gapPadding: 4.0,
+                //                 borderSide: BorderSide(
+                //                     color: Color(0xFF642E4C), width: 30))),
+                //         value: _value,
+                //         items: [
+                //           DropdownMenuItem(
+                //             child: Text("---select Gender---"),
+                //             value: '-1',
+                //           ),
+                //           DropdownMenuItem(
+                //             child: Text("Male"),
+                //             value: '0',
+                //           ),
+                //           DropdownMenuItem(
+                //             child: Text("Female"),
+                //             value: '1',
+                //           )
+                //         ],
+                //         onChanged: (v) {
+                //           genderController != v;
+                //         })),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                  child: TextFormField(
+                    controller: dateOfBirthController,
+                    validator: (value) {
+                      if(value== null || value.isEmpty )
+                        return "Field is required";
+                      return null;
+                    },
+                    keyboardType: TextInputType.none,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.green),
+                        ),
+                        labelText: "Date Of Birth",
+                        hintText: "Date Of Birth",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 4.0,
+                            borderSide:
+                                BorderSide(color: Color(0xFF642E4C), width: 30))),
+                    onTap: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1930),
+                          lastDate: DateTime.now());
+                      if (pickedDate != null) {
+                        setState(() {
+                          dateOfBirthController.text =
+                              DateFormat("yyyy-MM-dd").format(pickedDate).toString();
+                        });
+                      }
+                    },
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                  child: TextFormField(
+                    controller: mothersNameController,
+                    validator: (value) {
+                      if(value== null || value.isEmpty)
+                        return "Field is required";
+                      return null;
+                    },
+
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.green),
+                        ),
+                        labelText: "Mother's Name",
+                        hintText: "Mother's Name",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 4.0,
+                            borderSide:
+                                BorderSide(color: Color(0xFF642E4C), width: 30))),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                  child: TextFormField(
+                    controller: fathersNameController,
+                    validator: (value) {
+                      if(value== null || value.isEmpty)
+                        return "Field is required";
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.green),
+                        ),
+                        labelText: "Father's Name",
+                        hintText: "Father's Name",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 4.0,
+                            borderSide:
+                                BorderSide(color: Color(0xFF642E4C), width: 30))),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                  child: TextFormField(
+                    controller: divisionIdController,
+                    validator: (value) {
+                      if(value== null || value.isEmpty)
+                        return "Field is required";
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.green),
+                        ),
+                        labelText: "Division",
+                        hintText: "Division",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 4.0,
+                            borderSide:
+                                BorderSide(color: Color(0xFF642E4C), width: 30))),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                  child: TextFormField(
+                    controller: districtIdController,
+                    validator: (value) {
+                      if(value== null || value.isEmpty)
+                        return "Field is required";
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.green),
+                        ),
+                        labelText: "District",
+                        hintText: "District",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 4.0,
+                            borderSide:
+                                BorderSide(color: Color(0xFF642E4C), width: 30))),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                  child: TextFormField(
+                    controller: upazillaIdController,
+                    validator: (value) {
+                      if(value== null || value.isEmpty)
+                        return "Field is required";
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.green),
+                        ),
+                        labelText: "Upazilla",
+                        hintText: "Upazilla",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 4.0,
+                            borderSide:
+                                BorderSide(color: Color(0xFF642E4C), width: 30))),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                  child: TextFormField(
+                    controller: postOfficeIdController,
+                    validator: (value) {
+                      if(value== null || value.isEmpty)
+                        return "Field is required";
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.green),
+                        ),
+                        labelText: "Post Office",
+                        hintText: "Post Office",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 4.0,
+                            borderSide:
+                                BorderSide(color: Colors.green, width: 30))),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    takeImage();
+                  },
+                  child: image == null
+                      ? Container(
+                          height: MediaQuery.of(context).size.height * .25,
+                          width: MediaQuery.of(context).size.width * .5,
+                          color: Colors.green.withOpacity(.35),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(25),
+                            child: Icon(
+                              Icons.camera_alt_outlined,
+                              size: 80,
+                              color: Colors.green,
                             ),
                           ),
+                        )
+                      : Image.file(
+                          File(image!.path),
+                          height: 200,
+                          width: 250,
+                          fit: BoxFit.cover,
                         ),
-                      ))),
-            ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Center(
+                    child: Text(
+                  "Upload an Image",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                )),
+                Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Container(
+                        height: 40,
+                        width: 80,
+                        decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(13)),
+                        child: InkWell(
+                          onTap: () {
+                            if(_key.currentState!.validate()){
+                              _key.currentState!.save();
+                            }
+                            if(image == null){
+                              showInToast("Please Upload an Image");
+                            }
+                            addFisherman();
+                          },
+                          child: Center(
+                            child: Text(
+                              "Submit",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ))),
+              ],
+            ),
           ),
         ),
       ),
