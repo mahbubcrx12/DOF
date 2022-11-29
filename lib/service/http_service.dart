@@ -41,31 +41,4 @@ class HttpService {
   }
 }
 
-// class Data {
-//   int? id;
-//   String? image;
-//   String? path;
-//   String? heading;
-//   String? description;
-//   String? publishingDate;
-//   String? pdfFile;
-//   String? pdfFileWithExtension;
-//   String? status;
-//   String? createdBy;
-//   String? createdAt;
-//   String? updatedAt;
 
-//   Data(
-//       {this.id,
-//       this.image,
-//       this.path,
-//       this.heading,
-//       this.description,
-//       this.publishingDate,
-//       this.pdfFile,
-//       this.pdfFileWithExtension,
-//       this.status,
-//       this.createdBy,
-//       this.createdAt,
-//       this.updatedAt});
-// }

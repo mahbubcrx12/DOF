@@ -36,7 +36,7 @@ class _NoticePageState extends State<NoticePage> {
           quality: 60,
           name: "hello");
       print(result);
-      showInToast("Download Succesful");
+      showInToast("Download Successful");
     }
   }
 

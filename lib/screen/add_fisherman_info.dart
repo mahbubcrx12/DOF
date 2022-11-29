@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:motsha_app/service/get_division_list.dart';
 import 'package:motsha_app/service/http_service.dart';
 
 import '../const/toast_message.dart';
+import '../model/division_list_model.dart';
 
 class AddFisherMan extends StatefulWidget {
   const AddFisherMan({Key? key}) : super(key: key);
@@ -32,11 +34,11 @@ class _AddFisherManState extends State<AddFisherMan> {
   TextEditingController imageController = TextEditingController();
 
   final GlobalKey<FormState> _key=GlobalKey<FormState>();
+  String? selectedDivision;
+  List? data;
 
-  var _value = '-1';
 
   File? image;
-
   Future takeImage() async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.camera);
@@ -52,9 +54,6 @@ class _AddFisherManState extends State<AddFisherMan> {
   bool onProgress = false;
 
   Future addFisherman() async {
-    //  const Map<String, String> defaultHeader = {
-    //   "Accept": "application/json",
-    // };
     var link = Uri.parse("http://dof-demo.rdtl.xyz/api/fisher/add-data");
     var request = http.MultipartRequest("POST", link);
     request.headers.addAll(await HttpService.defaultHeader);
@@ -115,6 +114,18 @@ class _AddFisherManState extends State<AddFisherMan> {
 
     super.dispose();
   }
+
+
+@override
+  void didChangeDependencies() async{
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    await GetDivisionList().fetchDivision();
+    setState(() {
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -281,40 +292,6 @@ class _AddFisherManState extends State<AddFisherMan> {
                   ),
                 ),
 
-                // Padding(
-                //     padding:
-                //         const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                //     child: DropdownButtonFormField(
-                //
-                //         decoration: InputDecoration(
-                //             enabledBorder: OutlineInputBorder(
-                //               borderSide: BorderSide(color: Colors.green),
-                //             ),
-                //             labelText: "Gender",
-                //             hintText: "Gender",
-                //             border: OutlineInputBorder(
-                //                 borderRadius: BorderRadius.circular(12),
-                //                 gapPadding: 4.0,
-                //                 borderSide: BorderSide(
-                //                     color: Color(0xFF642E4C), width: 30))),
-                //         value: _value,
-                //         items: [
-                //           DropdownMenuItem(
-                //             child: Text("---select Gender---"),
-                //             value: '-1',
-                //           ),
-                //           DropdownMenuItem(
-                //             child: Text("Male"),
-                //             value: '0',
-                //           ),
-                //           DropdownMenuItem(
-                //             child: Text("Female"),
-                //             value: '1',
-                //           )
-                //         ],
-                //         onChanged: (v) {
-                //           genderController != v;
-                //         })),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
@@ -401,7 +378,7 @@ class _AddFisherManState extends State<AddFisherMan> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                  const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                   child: TextFormField(
                     controller: divisionIdController,
                     validator: (value) {
@@ -419,9 +396,39 @@ class _AddFisherManState extends State<AddFisherMan> {
                             borderRadius: BorderRadius.circular(12),
                             gapPadding: 4.0,
                             borderSide:
-                                BorderSide(color: Color(0xFF642E4C), width: 30))),
+                            BorderSide(color: Color(0xFF642E4C), width: 30))),
                   ),
                 ),
+
+                // Padding(
+                //   padding:
+                //       const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                //   child: DropdownButtonFormField(
+                //     value: selectedDivision,
+                //       items: GetDivisionList.divisionListData.map((list){
+                //         return DropdownMenuItem(
+                //             child: Text("${list.divisionEng}"),
+                //           value: ["list.divisionEng"],
+                //         );
+                //       }).toList(),
+                //       onChanged: (value){
+                //         setState(() {
+                //           genderController.text=value.toString();
+                //         });
+                //       },
+                //     decoration: InputDecoration(
+                //         enabledBorder: OutlineInputBorder(
+                //           borderSide: BorderSide(color: Colors.green),
+                //         ),
+                //         labelText: "Division",
+                //         hintText: "Division",
+                //         border: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(12),
+                //             gapPadding: 4.0,
+                //             borderSide:
+                //             BorderSide(color: Color(0xFF642E4C), width: 30))),
+                //       )
+                // ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
