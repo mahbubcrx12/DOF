@@ -9,10 +9,11 @@ import 'package:motsha_app/service/get_division_list.dart';
 import 'package:motsha_app/service/http_service.dart';
 
 import '../const/toast_message.dart';
-import '../model/division_list_model.dart';
+
 
 class AddFisherMan extends StatefulWidget {
-  const AddFisherMan({Key? key}) : super(key: key);
+ const AddFisherMan({Key? key}) : super(key: key);
+
 
   @override
   State<AddFisherMan> createState() => _AddFisherManState();
@@ -32,10 +33,11 @@ class _AddFisherManState extends State<AddFisherMan> {
   TextEditingController upazillaIdController = TextEditingController();
   TextEditingController postOfficeIdController = TextEditingController();
   TextEditingController imageController = TextEditingController();
+  String? _selectedDivision;
 
   final GlobalKey<FormState> _key=GlobalKey<FormState>();
-  String? selectedDivision;
-  List? data;
+
+
 
 
   File? image;
@@ -296,8 +298,8 @@ class _AddFisherManState extends State<AddFisherMan> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                   child: TextFormField(
-                    controller: dateOfBirthController,
-                    validator: (value) {
+                      controller: dateOfBirthController,
+                      validator: (value) {
                       if(value== null || value.isEmpty )
                         return "Field is required";
                       return null;
@@ -376,46 +378,16 @@ class _AddFisherManState extends State<AddFisherMan> {
                                 BorderSide(color: Color(0xFF642E4C), width: 30))),
                   ),
                 ),
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                  child: TextFormField(
-                    controller: divisionIdController,
-                    validator: (value) {
-                      if(value== null || value.isEmpty)
-                        return "Field is required";
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.green),
-                        ),
-                        labelText: "Division",
-                        hintText: "Division",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            gapPadding: 4.0,
-                            borderSide:
-                            BorderSide(color: Color(0xFF642E4C), width: 30))),
-                  ),
-                ),
-
                 // Padding(
                 //   padding:
-                //       const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                //   child: DropdownButtonFormField(
-                //     value: selectedDivision,
-                //       items: GetDivisionList.divisionListData.map((list){
-                //         return DropdownMenuItem(
-                //             child: Text("${list.divisionEng}"),
-                //           value: ["list.divisionEng"],
-                //         );
-                //       }).toList(),
-                //       onChanged: (value){
-                //         setState(() {
-                //           genderController.text=value.toString();
-                //         });
-                //       },
+                //   const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                //   child: TextFormField(
+                //     controller: divisionIdController,
+                //     validator: (value) {
+                //       if(value== null || value.isEmpty)
+                //         return "Field is required";
+                //       return null;
+                //     },
                 //     decoration: InputDecoration(
                 //         enabledBorder: OutlineInputBorder(
                 //           borderSide: BorderSide(color: Colors.green),
@@ -427,8 +399,44 @@ class _AddFisherManState extends State<AddFisherMan> {
                 //             gapPadding: 4.0,
                 //             borderSide:
                 //             BorderSide(color: Color(0xFF642E4C), width: 30))),
-                //       )
+                //   ),
                 // ),
+
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                  child: DropdownButtonFormField(
+                    value: _selectedDivision,
+                      items: GetDivisionList.divisionListData.map((list){
+                        return DropdownMenuItem<String>(
+                            child: Text("${list.divisionEng}"),
+                          value: list.divisionEng,
+                        );
+                      }).toList(),
+                      onChanged: (value){
+                        setState(() {
+                          _selectedDivision=value.toString();
+
+                        });
+                        print("sssssssssssssss $_selectedDivision");
+                      },
+
+
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.green),
+                        ),
+                        labelText: "Division",
+                        hintText: "Division",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 4.0,
+                            borderSide:
+                            BorderSide(color: Color(0xFF642E4C), width: 30))),
+                      ),
+
+                ),
+
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 15),

@@ -18,7 +18,8 @@ class GetDivisionList{
       print(response.statusCode);
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
-        print(data);
+        // print("uuuuuuuuuuuuuuuuuu");
+        // print(data[1]);
 
         DivisionList divisionData;
         for (var i in data) {
@@ -27,7 +28,7 @@ class GetDivisionList{
 
         }
         //print('kkkkkkkkkkkkkkkkkkkkkk');
-        print(divisionListData);
+        //print(divisionListData);
         return divisionListData;
       } else {
         return divisionListData;
